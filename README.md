@@ -22,28 +22,43 @@ ng add @angular-architects/module-federation --project mf-shopping --port 4201 -
 ```
 
 4. Configuración para el host en el webpack.config.js
-```console
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+```javascript
+const { 
+  shareAll, 
+  withModuleFederationPlugin 
+} = require('@angular-architects/module-federation/webpack');
+
 module.exports = withModuleFederationPlugin({
   remotes: {  
     mfPayment: "http://localhost:4202/remoteEntry.js",    
   },
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({ 
+      singleton: true, 
+      strictVersion: true, 
+      requiredVersion: 'auto' 
+    }),
   },
 });
 ```
 
 5. Configuración para el mf en el webpack.config.js
-```console
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+```javascript
+const { 
+  shareAll, 
+  withModuleFederationPlugin 
+} = require('@angular-architects/module-federation/webpack');
+
 module.exports = withModuleFederationPlugin({
   name: 'mfPayment',
   exposes: {
     "./PaymentComponent": "./src/app/payment/payment.component.ts",
   },
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({ 
+      singleton: true, 
+      strictVersion: true, 
+      requiredVersion: 'auto' 
+    }),
   },
 });
-```

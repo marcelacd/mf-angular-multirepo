@@ -1,1 +1,22 @@
-<p>Desde el mf payment 🤑</p>
+<div class="container">
+  <h1>Productos agregados</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Descripcion del producto</th>
+        <th>Precio</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of products">
+        <td data-label="Projeto">{{ item.name }}</td>
+        <td data-label="Projeto">$ {{ item.price }}</td>
+        <td data-label="Projeto" (click)="deleteProduct(item.id)">
+          <span class="material-icons"> delete </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
