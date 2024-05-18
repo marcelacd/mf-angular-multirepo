@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ICommonProduct } from '../models/product.interface';
+
+interface ICommonProduct {
+  id: number;
+  price: number;
+  name: string;
+}
 
 @Component({
   standalone: true,

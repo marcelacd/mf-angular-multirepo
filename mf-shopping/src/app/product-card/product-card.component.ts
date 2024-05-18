@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IProductCard } from '../models/product-card.interface';
+import PubSub from 'pubsub-js'
+
 @Component({
   standalone: true,
   selector: 'app-product-card',
@@ -8,18 +10,14 @@ import { IProductCard } from '../models/product-card.interface';
   styleUrls: ['./product-card.component.scss'],
   imports: [CommonModule],
 })
+
 export class ProductCardComponent {
   @Input() product?: IProductCard;
 
   constructor(
-    // private _commonsLibService: CommonsLibService
-  ) {}
+  ) { }
 
   clickCard(): void {
-    // this._commonsLibService.sendData({
-    //   id: this.product!.id,
-    //   name: this.product!.name,
-    //   price: this.product!.price,
-    // });
+    PubSub.publish('products', this.product)
   }
 }
