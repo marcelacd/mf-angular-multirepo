@@ -25,8 +25,7 @@ ng add @angular-architects/module-federation --project mf-shopping --port 4201 -
 ```console
 const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 module.exports = withModuleFederationPlugin({
-  remotes: {
-    mfShopping: "http://localhost:4201/remoteEntry.js",   
+  remotes: {  
     mfPayment: "http://localhost:4202/remoteEntry.js",    
   },
   shared: {
