@@ -15,26 +15,30 @@ interface ICommonProduct {
 
 export class AppComponent implements OnInit{
 
-  count = 0
+  // count = 0
   products: ICommonProduct[] = []
 
   constructor(
   ) { }
 
   ngOnInit(): void {
-    // this.getProducts()
+    this.getProducts()
     PubSub.subscribe('products', (_message, data) => {
       this.products.unshift(data as unknown as ICommonProduct)
-      this.count++
+      // this.count++
       localStorage.setItem('products', JSON.stringify(this.products))
+    })
+
+    PubSub.subscribe('product', () => {
+      this.getProducts()
     })
   }
 
-  // getProducts(){
-  //   const productsStorage = localStorage.getItem('products');
-  //   if (productsStorage) {
-  //     this.products = JSON.parse(productsStorage) as ICommonProduct[];
-  //   }
-  // }
+  getProducts(){
+    const productsStorage = localStorage.getItem('products');
+    if (productsStorage) {
+      this.products = JSON.parse(productsStorage) as ICommonProduct[];
+    }
+  }
 
 }

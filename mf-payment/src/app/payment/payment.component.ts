@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import PubSub from 'pubsub-js'
 
 interface ICommonProduct {
   id: number;
@@ -32,7 +33,10 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(idProduct: number) {
+    PubSub.publish('product', idProduct)
+    this.products = this.products.filter(product => product.id !== idProduct)
+    localStorage.setItem('products', JSON.stringify(this.products))
     this.getProducts()
   }
 }
